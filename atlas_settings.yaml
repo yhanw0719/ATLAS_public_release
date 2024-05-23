@@ -2,7 +2,7 @@
 region: sfbay
 scenario: base
 start_year: 2017
-end_year: 2023
+end_year: 2021
 vehicle_ownership_freq: 2
 
 # simulation platforms (leave blank to turn off) 
