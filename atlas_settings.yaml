@@ -1,0 +1,37 @@
+# scenario defs
+region: sfbay
+scenario: base
+start_year: 2017
+end_year: 2023
+vehicle_ownership_freq: 2
+
+# simulation platforms (leave blank to turn off) 
+vehicle_ownership_model: atlas
+
+# docker or singularity
+container_manager: docker # OR singularity
+singularity_images:
+  atlas: docker://ghcr.io/lbnl-science-it/atlas:v2.0.12
+docker_images:
+  atlas: ghcr.io/lbnl-science-it/atlas:sfb-v2.0.12
+docker_stdout: True 
+pull_latest: True
+
+## ATLAS: vehicle simulation 
+## Docker bind mounts: host == local; container == remote == client
+atlas_host_input_folder: atlas/atlas_input
+atlas_host_output_folder: atlas/atlas_output
+atlas_container_input_folder: /atlas_input
+atlas_container_output_folder: /atlas_output
+atlas_basedir: /
+atlas_codedir: /
+atlas_sample_size: 0     # zero means no sampling, whole pop.
+atlas_num_processes: 10  # number of processors
+atlas_beamac: 0 # 0 if use pre-processed accessibility RData, otherwise inline calc
+atlas_mod: 2 # 1 (static) or 2 (dynamic)
+atlas_adscen: example # ess_cons; zev_mandate; baseline; example
+atlas_rebfactor: 1 # whether to turn on rebate incentive, 0 = NO, 1 = YES
+atlas_taxfactor: 1 # whether to turn on tax credit incentive, 0 = NO, 1 = YES
+atlas_discIncent: 0 # whether to discount incentive dollars, 0 = NO (default), 1 = YES
+atlas_formattable_command: "--freq {0} --outyear {1} --npe {2} --nsample {3} --basedir {4} --codedir {5} --beamac {6} --mod {7} --adscen {8} --rebfactor {9} --taxfactor {10} --discIncent {11}"
+
